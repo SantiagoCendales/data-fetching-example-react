@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 const BASE_CAT_API_URL = 'https://cataas.com/'
 
 export const useCatImage = ({ fact }) => {
-  const [image, setImageUrl] = useState(fact)
+  const [image, setImageUrl] = useState()
 
   useEffect(() => {
     if (!fact) return

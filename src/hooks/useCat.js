@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react'
-const CAT_RANDOM_FACT = 'https://catfact.ninja/fact'
+import { getCatFact } from '../services/facts'
 
 export const useCat = () => {
   const [fact, setFact] = useState(null)
 
   useEffect(() => {
-    fetch(CAT_RANDOM_FACT)
-      .then((data) => {
-        console.log(data)
-        data.json()
-          .then((resp) => {
-            const { fact } = resp
-            setFact(fact)
-          })
-      })
+    // const getFact = async () => {
+    //   const catFactResp = await getCatFact()
+    //   setFact(catFactResp)
+    // }
+    // getFact() <====== Código con async await
+    getCatFact().then((data) => setFact(data))
   }, [])
+
+  const getNewFact = async () => {
+    const newFact = await getCatFact()
+    setFact(newFact)
+  }
   return {
-    fact
+    fact,
+    getNewFact
   }
 }
